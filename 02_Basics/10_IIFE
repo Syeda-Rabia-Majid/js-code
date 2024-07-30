@@ -1,0 +1,18 @@
+//Immediately Invoked Function Epression
+
+(function code(){
+    //Named IIFE
+    console.log("DB connected")
+})(); //invoked function invoke but actually it does not know where to stop context thats why
+      // ; necessay
+
+((name) => {
+    //Simple IIFE
+    console.log(`DB connected 2, ${name}`)
+})("Root")
+
+// ()()  1st one () => refrence , 2nd one () => execution
+
+
+//sometimes pollution of global scope creates problem, to remove the pollution of variabes etc..
+//we use IIFE , alse we use IIFE to imediately invoked any function
