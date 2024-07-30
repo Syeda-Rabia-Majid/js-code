@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Example</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+            padding: 16px;
+        }
+
+        .card-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card-content {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .card-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-item:last-child {
+            border-bottom: none;
+        }
+
+        #newUserButton {
+            margin-top: 16px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #newUserButton:hover {
+            background-color: #0056b3;
+        }
+
+        .info {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #detail {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #detail li {
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="card">
+        <img src="" alt="User Image" class="card-image" id="userImage">
+        <ul class="card-content">
+            <li class="card-item" id="userName">Name: </li>
+            <li class="card-item" id="userId">ID: </li>
+            <li class="card-item" id="userPhone">Phone: </li>
+        </ul>
+        <button id="newUserButton">Get Data</button>
+    </div>
+    <div class="info">
+        <ul id="detail">
+            <li id="email">Email:</li>
+            <li id="dob">Age:</li>
+        </ul>
+    </div>
+    <script>
+        const fetchUserData = () => {
+            const xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+            const requestURL = 'https://randomuser.me/api/'; // Define the API URL
+
+            xhr.open('GET', requestURL); // Open a GET request to the API URL
+
+            xhr.onreadystatechange = function() {
+                console.log(xhr.readyState); // Log the current readyState
+                if (xhr.readyState == 4 && xhr.status == 200) { // Check if the request is complete and successful
+                    const data = JSON.parse(this.responseText); // Parse the JSON response
+                    const user = data.results[0];
+                    const pic = user.picture.large;
+                    const name = `${user.name.first} ${user.name.last}`;
+                    const id = user.login.uuid; // Correctly accessing id
+                    const phone = user.phone;
+                    const email = user.email; // Correctly accessing email
+                    const dob = user.dob.age;
+
+                    document.getElementById('userImage').src = pic;
+                    document.getElementById('userName').textContent = `Name: ${name}`;
+                    document.getElementById('userId').textContent = `ID: ${id}`;
+                    document.getElementById('userPhone').textContent = `Phone: ${phone}`;
+
+                    // Update email and dob when button is clicked
+                    document.getElementById('newUserButton').onclick = (e) => {
+                        document.getElementById('email').textContent = `Email: ${email}`;
+                        document.getElementById('dob').textContent = `Age: ${dob}`;
+                    };
+                }
+            };
+
+            xhr.send(); // Send the request
+        };
+
+        document.addEventListener('DOMContentLoaded', fetchUserData); // Fetch initial user data
+    </script>
+</body>
+</html>
+
+<!-- DOMContentLoaded Event: This event is triggered when the document has been completely loaded and parsed, which means the browser has fully constructed the DOM tree from the HTML. This is usually much earlier than the load event, which waits for all external resources to load as well. -->
