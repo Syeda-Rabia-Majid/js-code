@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Events</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <div>
+        <h1>My Dream</h1>
+        <ul id="images">
+            <li><img width="200px" id="book2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGXfjPAVlVYuM7mduT3NY5Yn47D1V4VxgA4w&s" alt="book"></li>
+            <li><img width="200px" id="book" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGXfjPAVlVYuM7mduT3NY5Yn47D1V4VxgA4w&s" alt="book"></li>
+            <li><img width="200px" id="coffee" src="https://www.thespruceeats.com/thmb/Hz677yfVdPECquUOekjv0b9yXTE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/SES-mocha-4797918-step-04-599987714aec41aba02f1f870e900dd8.jpg" alt="coffee" onclick="alert('Take coffee')"></li>
+            <li><img width="200px" id="istanbul" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrkzeDxprpzQt2r5FJsSdrW3fPXW5I6X1XUw&s" alt="istanbul2"></li>
+            <li><img width="200px" id="house" src="https://img.freepik.com/premium-photo/halloween-background-with-spooky-moonlight-illuminates-house-winter-generated-by-ai_604947-122.jpg" alt="house"></li>
+            <li><img width="200px" id="autumn" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjNlog4luJtxk4yJQB3q28JyJKpPqJ1tnvYA&s" alt="autumn"></li>
+            <li><a style="color: aliceblue;"  href="https://www.facebook.com/" id="facebook">facebook</a></li>
+        </ul>
+    </div>
+    <script>
+        // Inline click handler for 'autumn' image
+        document.getElementById('autumn').onclick = function() {
+            alert('life will end');
+        };
+
+        // Event listener for 'autumn' image with addEventListener
+        // document.getElementById('autumn').addEventListener('click', function(e) {
+        //     alert('Nothing lasts forever.');
+        //     console.log('Autumn image clicked');
+        // }, false); // Bubbling phase (default)
+
+        // Event listener for 'images' ul
+        // document.getElementById('images').addEventListener('click', function(e) {
+        //     console.log('Clicked inside the ul');
+        // }, false); // Bubbling phase (default)
+
+        // Event listener for 'house' image with stopPropagation
+        // document.getElementById('house').addEventListener('click', function(e) {
+        //     console.log('Darkness never leaves');
+        //     e.stopPropagation(); // Prevents the event from bubbling up to parent elements
+        // }, false); // Bubbling phase (default)
+
+        // Event listener for 'images' ul in capturing phase
+        // document.getElementById('images').addEventListener('click', function(e) {
+        //     console.log('Clicked inside the ul (capturing)');
+        // }, true); // Capturing phase (top to bottom)
+
+        // Event listener for 'house' image in capturing phase
+        // document.getElementById('house').addEventListener('click', function(e) {
+        //     console.log('Mysteries in the mist (capturing)');
+        // }, true); // Capturing phase (top to bottom)
+
+        // document.getElementById('facebook').addEventListener('click',function(e){
+        //     e.preventDefault();
+        //     console.log('facebook clicked');
+        //     e.stopPropagation(); // Prevents the event from bubbling up to parent elements
+        // })
+
+        document.querySelector('#images').addEventListener('click', function(e){
+            // console.log(e.target.parentNode)
+            console.log(e.target.tagName);
+            if (e.target.tagName === 'IMG') {
+                console.log(e.target.id)
+                let removeit = e.target.parentNode;
+            removeit.remove();              
+            }
+            
+
+            // removeit.parentNode.removeChild(removeit)
+
+        })
+    </script>
+</body>
+</html>
