@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: black;">
+
+    
+    
+</body>
+<script>
+    const requestURL = 'https://randomuser.me/api/'
+    const xhr =  new XMLHttpRequest() //almost a class and we have to make of it object
+    xhr.open('GET', requestURL);       // we have to call open 
+
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState);
+        if(xhr.readyState == 4){
+            const data = JSON.parse(this.responseText);
+            console.log(typeof data);
+            const id = data.results[0].id
+            console.log(id);
+            console.log(id.value);
+        }
+    }
+    xhr.send();                  // Use this property to called open
+
+</script>
+</html>
+
+
+<!-- 0: UNSENT - The XMLHttpRequest object has been created but the open() method hasn't been called yet.
+1: OPENED - The open() method has been called.
+2: HEADERS_RECEIVED - The send() method has been called, and the response headers and status are available.
+3: LOADING - The response body is being received (if any).
+4: DONE - The XMLHttpRequest operation is complete. -->
